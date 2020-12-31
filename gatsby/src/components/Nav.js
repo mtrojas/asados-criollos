@@ -12,7 +12,7 @@ export default function Nav() {
           <Link to="/menu/">Menu</Link>
         </li>
         <li>
-          <Link to="/">LOGO</Link>
+          <Link to="/">Asados Criollos</Link>
         </li>
         <li>
           <Link to="/parrilleros">Parrilleros</Link>
