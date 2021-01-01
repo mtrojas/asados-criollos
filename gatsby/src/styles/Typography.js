@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-import font from '../assets/fonts/julius.ttf';
+import font from '../assets/fonts/recoleta.woff';
 
 const Typography = createGlobalStyle`
   @font-face {
