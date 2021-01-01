@@ -1,15 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
-import font from '../assets/fonts/recoleta.woff';
+import font from '../assets/fonts/julius.ttf';
 
 const Typography = createGlobalStyle`
   @font-face {
-    font-family: Recoleta ;
+    font-family: Julius ;
     src: url(${font});
   }
 
+
   html {
-    font-family: Recoleta, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Julius, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: var(--black);
   }
 
