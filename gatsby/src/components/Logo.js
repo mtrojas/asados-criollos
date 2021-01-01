@@ -6,8 +6,8 @@ const LogoStyles = styled.div`
   /* This value controls the entire size of the logo*/
   font-size: 6px;
   font-size: clamp(1px, 0.65vw, 8px);
-  width: 40em;
-  height: 40em;
+  width: 35em;
+  height: 35em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   margin: 0;
   --borderSize: 1em;
@@ -99,7 +99,7 @@ export default function Logo() {
   return (
     <LogoStyles className="logo">
       <div className="inner">
-        <span className="est">EST 1994</span>
+        <span className="est">EST 2020</span>
         <h1>
           <span className="asados">
             <span className="letter A">A</span>
