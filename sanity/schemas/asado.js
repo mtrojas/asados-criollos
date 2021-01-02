@@ -16,6 +16,12 @@ export default {
       description: 'Nombre del asado',
     },
     {
+      name: 'description',
+      title: 'Descripción',
+      type: 'text',
+      description: 'Cuéntanos en qué consiste este asado',
+    },
+    {
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -37,7 +43,7 @@ export default {
       title: 'Price',
       type: 'number',
       description: 'Precio del asado en pesos',
-      validation: (Rule) => Rule.min(1000).max(5000),
+      validation: (Rule) => Rule.min(10000).max(500000),
       inputComponent: PriceInput,
     },
     {
