@@ -1,11 +1,13 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import AsadoList from '../components/AsadoList';
+import ToppingsFilter from '../components/ToppingsFilter';
 
 export default function MenuPage({ data }) {
   const asados = data.asados.nodes;
   return (
     <>
+      <ToppingsFilter />
       <AsadoList asados={asados} />
     </>
   );
