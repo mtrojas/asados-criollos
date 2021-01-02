@@ -1,4 +1,5 @@
 import { GiBarbecue as icon } from 'react-icons/gi';
+import PriceInput from '../components/PriceInput';
 
 export default {
   // Computer Name
@@ -37,7 +38,7 @@ export default {
       type: 'number',
       description: 'Precio del asado en pesos',
       validation: (Rule) => Rule.min(1000).max(5000),
-      // TODO: Add custom input component
+      inputComponent: PriceInput,
     },
     {
       name: 'toppings',
