@@ -1,9 +1,37 @@
 import React from 'react';
+import { graphql } from 'gatsby';
+import AsadoList from '../components/AsadoList';
 
-export default function MenuPage() {
+export default function MenuPage({ data }) {
+  const asados = data.asados.nodes;
   return (
     <>
-      <p>Hey! I'm the Menu page</p>
+      <AsadoList asados={asados} />
     </>
   );
 }
+
+export const query = graphql`
+  query MenuQuery {
+    asados: allSanityAsado {
+      nodes {
+        name
+        id
+        slug {
+          current
+        }
+        toppings {
+          id
+          name
+        }
+        image {
+          asset {
+            fluid(maxWidth: 400) {
+              ...GatsbySanityImageFluid
+            }
+          }
+        }
+      }
+    }
+  }
+`;
