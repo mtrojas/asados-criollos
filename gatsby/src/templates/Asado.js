@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
 
-const PizzaGrid = styled.div`
+const AsadoGrid = styled.div`
   display: grid;
   grid-gap: 2rem;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -11,7 +11,7 @@ const PizzaGrid = styled.div`
 
 export default function SingleAsadoPage({ data: { asado } }) {
   return (
-    <PizzaGrid>
+    <AsadoGrid>
       <Img fluid={asado.image.asset.fluid} />
       <div>
         <h2 className="mark">{asado.name}</h2>
@@ -21,7 +21,7 @@ export default function SingleAsadoPage({ data: { asado } }) {
           ))}
         </ul>
       </div>
-    </PizzaGrid>
+    </AsadoGrid>
   );
 }
 

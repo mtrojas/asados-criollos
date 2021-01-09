@@ -16,7 +16,6 @@ async function turnAsadosIntoPages({ graphql, actions }) {
       }
     }
   `);
-  console.log(data);
   // 3. Loop over each asado and create a page for that asado
   data.asados.nodes.forEach((asado) => {
     actions.createPage({
@@ -30,10 +29,47 @@ async function turnAsadosIntoPages({ graphql, actions }) {
   });
 }
 
+async function turnToppingsIntoPages({ graphql, actions }) {
+  console.log('Turning the Toppings into Pages!!');
+  // 1. Get a template for this page
+  const toppingTemplate = path.resolve('./src/pages/menu.js');
+  // 2. Query all the toppings
+  const { data } = await graphql(`
+    query {
+      toppings: allSanityTopping {
+        nodes {
+          id
+          name
+        }
+      }
+    }
+  `);
+  console.log(data);
+  // 3. Create page for that topping
+  data.toppings.nodes.forEach((topping) => {
+    console.log(`creating page for topping`, topping.name);
+    actions.createPage({
+      path: `topping/${topping.name}`,
+      component: toppingTemplate,
+      context: {
+        topping: topping.name,
+        // TODO Regex for topping
+        toppingRegex: `/${topping.name}/i`,
+      },
+    });
+  });
+  // 4. Pass topping data to asado.js
+}
+
 export async function createPages(params) {
   // Create pages dynamically
-  // 1. Asados
-  await turnAsadosIntoPages(params);
-  // 2. Toppings
+
+  await Promise.all([
+    // 1. Asados
+    turnAsadosIntoPages(params),
+    // 2. Toppings
+    turnToppingsIntoPages(params),
+  ]);
+
   // 3. Parrilleros
 }

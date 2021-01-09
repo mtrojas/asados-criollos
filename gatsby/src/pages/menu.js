@@ -3,19 +3,21 @@ import { graphql } from 'gatsby';
 import AsadoList from '../components/AsadoList';
 import ToppingsFilter from '../components/ToppingsFilter';
 
-export default function MenuPage({ data }) {
+export default function MenuPage({ data, pageContext }) {
   const asados = data.asados.nodes;
   return (
     <>
-      <ToppingsFilter />
+      <ToppingsFilter activeTopping={pageContext.topping} />
       <AsadoList asados={asados} />
     </>
   );
 }
 
 export const query = graphql`
-  query MenuQuery {
-    asados: allSanityAsado {
+  query MenuQuery($toppingRegex: String) {
+    asados: allSanityAsado(
+      filter: { toppings: { elemMatch: { name: { regex: $toppingRegex } } } }
+    ) {
       nodes {
         name
         id
