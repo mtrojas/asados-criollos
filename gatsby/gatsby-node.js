@@ -51,7 +51,7 @@ async function turnToppingsIntoPages({ graphql, actions }) {
       component: toppingTemplate,
       context: {
         topping: topping.name,
-        // TODO Regex for topping
+        // Regex for topping
         toppingRegex: `/${topping.name}/i`,
       },
     });
@@ -104,7 +104,17 @@ async function turnParrillerosIntoPages({ graphql, actions }) {
       }
     }
   `);
-  // TODO:  2. Turn each parrillero into their own page
+  // 2. Turn each parrillero into their own page
+  data.parrilleros.nodes.forEach((parrillero) => {
+    actions.createPage({
+      component: path.resolve('./src/templates/Parrillero.js'),
+      path: `parrillero/${parrillero.slug.current}`,
+      context: {
+        name: parrillero.name,
+        slug: parrillero.slug.current,
+      },
+    });
+  });
   // 3. Figure out how many pages there are based on how many parrilleros there are, and how many per page!
   const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
   const pageCount = Math.ceil(data.parrilleros.totalCount / pageSize);
