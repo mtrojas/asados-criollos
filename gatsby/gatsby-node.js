@@ -88,6 +88,45 @@ async function fetchBeersAndTurnIntoNodes({
   // 3. Create a node for that beer
 }
 
+async function turnParrillerosIntoPages({ graphql, actions }) {
+  // 1. Query all parrilleros
+  const { data } = await graphql(`
+    query {
+      parrilleros: allSanityPerson {
+        totalCount
+        nodes {
+          name
+          id
+          slug {
+            current
+          }
+        }
+      }
+    }
+  `);
+  // TODO:  2. Turn each parrillero into their own page
+  // 3. Figure out how many pages there are based on how many parrilleros there are, and how many per page!
+  const pageSize = parseInt(process.env.GATSBY_PAGE_SIZE);
+  const pageCount = Math.ceil(data.parrilleros.totalCount / pageSize);
+  console.log(
+    `There are ${data.parrilleros.totalCount} parrilleros. And we have ${pageCount} pages with ${pageSize} per page`
+  );
+  // 4. Loop from 1 to n and create the pages for them
+  Array.from({ length: pageCount }).forEach((_, i) => {
+    console.log(`Creating page ${i}`);
+    actions.createPage({
+      path: `/parrilleros/${i + 1}`,
+      component: path.resolve('./src/pages/parrilleros.js'),
+      // This data is passed to the template when we create it
+      context: {
+        skip: i * pageSize,
+        currentPage: i + 1,
+        pageSize,
+      },
+    });
+  });
+}
+
 export async function sourceNodes(params) {
   // Fetch a list of beers and source them into our gatsby API
   await Promise.all([fetchBeersAndTurnIntoNodes(params)]);
@@ -101,7 +140,7 @@ export async function createPages(params) {
     turnAsadosIntoPages(params),
     // 2. Toppings
     turnToppingsIntoPages(params),
+    // 3. Parrilleros
+    turnParrillerosIntoPages(params),
   ]);
-
-  // 3. Parrilleros
 }

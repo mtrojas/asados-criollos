@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
+import Pagination from '../components/Pagination';
 
 const ParrillerosGrid = styled.div`
   display: grid;
@@ -36,13 +37,20 @@ const ParrilleroStyle = styled.div`
   }
 `;
 
-export default function ParrillerosPage({ data }) {
+export default function ParrillerosPage({ data, pageContext }) {
   const parrilleros = data.parrilleros.nodes;
   return (
     <>
+      <Pagination
+        pageSize={parseInt(process.env.GATSBY_PAGE_SIZE)}
+        totalCount={data.parrilleros.totalCount}
+        currentPage={pageContext.currentPage || 1}
+        skip={pageContext.skip}
+        base="/parrilleros"
+      />
       <ParrillerosGrid>
         {parrilleros.map((parrillero) => (
-          <ParrilleroStyle>
+          <ParrilleroStyle key={parrillero.id}>
             <Link to={`/parrillero/${parrillero.slug.current}`}>
               <h2>
                 <span className="mark">{parrillero.name}</span>
@@ -58,8 +66,8 @@ export default function ParrillerosPage({ data }) {
 }
 
 export const query = graphql`
-  query {
-    parrilleros: allSanityPerson {
+  query($skip: Int = 0, $pageSize: Int = 4) {
+    parrilleros: allSanityPerson(skip: $skip, limit: $pageSize) {
       totalCount
       nodes {
         name
