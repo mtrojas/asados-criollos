@@ -7,9 +7,11 @@ export default {
     title: `Asados Criollos`,
     siteUrl: `https://www.asadoscriollos.cl`,
     description: `Los mejores asados en tu casa`,
+    instagram: `asadoscriollos`,
   },
   plugins: [
     `gatsby-plugin-styled-components`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-sanity`,
       options: {

@@ -1,17 +1,21 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import SEO from '../components/SEO';
 
 export default function ParrilleroPage({ data: { parrillero } }) {
   console.log(parrillero);
   return (
-    <div className="center">
-      <Img fluid={parrillero.image.asset.fluid} />
-      <h2>
-        <span className="mark">{parrillero.name}</span>
-      </h2>
-      <p>{parrillero.description}</p>
-    </div>
+    <>
+      <SEO title={parrillero.name} image={parrillero.image.asset.src} />
+      <div className="center">
+        <Img fluid={parrillero.image.asset.fluid} />
+        <h2>
+          <span className="mark">{parrillero.name}</span>
+        </h2>
+        <p>{parrillero.description}</p>
+      </div>
+    </>
   );
 }
 

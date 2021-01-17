@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
 import Pagination from '../components/Pagination';
+import SEO from '../components/SEO';
 
 const ParrillerosGrid = styled.div`
   display: grid;
@@ -41,6 +42,7 @@ export default function ParrillerosPage({ data, pageContext }) {
   const parrilleros = data.parrilleros.nodes;
   return (
     <>
+      <SEO title={`Parrilleros - Página ${pageContext.currentPage || 1}`} />
       <Pagination
         pageSize={parseInt(process.env.GATSBY_PAGE_SIZE)}
         totalCount={data.parrilleros.totalCount}

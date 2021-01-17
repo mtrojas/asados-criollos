@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import styled from 'styled-components';
+import SEO from '../components/SEO';
 
 const AsadoGrid = styled.div`
   display: grid;
@@ -11,17 +12,20 @@ const AsadoGrid = styled.div`
 
 export default function SingleAsadoPage({ data: { asado } }) {
   return (
-    <AsadoGrid>
-      <Img fluid={asado.image.asset.fluid} />
-      <div>
-        <h2 className="mark">{asado.name}</h2>
-        <ul>
-          {asado.toppings.map((topping) => (
-            <li key={topping.id}>{topping.name}</li>
-          ))}
-        </ul>
-      </div>
-    </AsadoGrid>
+    <>
+      <SEO title={asado.name} image={asado.image?.asset?.fluid?.src} />
+      <AsadoGrid>
+        <Img fluid={asado.image.asset.fluid} />
+        <div>
+          <h2 className="mark">{asado.name}</h2>
+          <ul>
+            {asado.toppings.map((topping) => (
+              <li key={topping.id}>{topping.name}</li>
+            ))}
+          </ul>
+        </div>
+      </AsadoGrid>
+    </>
   );
 }
 
