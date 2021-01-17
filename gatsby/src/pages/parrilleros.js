@@ -50,8 +50,11 @@ export default function ParrillerosPage({ data, pageContext }) {
       />
       <ParrillerosGrid>
         {parrilleros.map((parrillero) => (
-          <ParrilleroStyle key={parrillero.id}>
-            <Link to={`/parrillero/${parrillero.slug.current}`}>
+          <ParrilleroStyle>
+            <Link
+              key={parrillero.id}
+              to={`/parrillero/${parrillero.slug.current}`}
+            >
               <h2>
                 <span className="mark">{parrillero.name}</span>
               </h2>
