@@ -5,6 +5,8 @@ import SEO from '../components/SEO';
 import useForm from '../utils/useForm';
 import calculateAsadoPrice from '../utils/calculateAsadoPrice';
 import formatMoney from '../utils/formatMoney';
+import OrderStyles from '../styles/OrderStyles';
+import MenuItemStyles from '../styles/MenuItemStyles';
 
 export default function QuieroPage({ data }) {
   const { values, updateValue } = useForm({
@@ -15,7 +17,7 @@ export default function QuieroPage({ data }) {
   return (
     <>
       <SEO title="Quiero mi asado!" />
-      <form>
+      <OrderStyles>
         <fieldset>
           <legend>Tus datos</legend>
           <label htmlFor="name">
@@ -40,10 +42,10 @@ export default function QuieroPage({ data }) {
             />
           </label>
         </fieldset>
-        <fieldset>
+        <fieldset className="menu">
           <legend>Elige tu asado</legend>
           {asados.map((asado) => (
-            <div key={asado.id}>
+            <MenuItemStyles key={asado.id}>
               <Img
                 width="50"
                 height="50"
@@ -60,13 +62,13 @@ export default function QuieroPage({ data }) {
                   </button>
                 ))}
               </div>
-            </div>
+            </MenuItemStyles>
           ))}
         </fieldset>
-        <fieldset>
+        <fieldset className="order">
           <legend>Resumen</legend>
         </fieldset>
-      </form>
+      </OrderStyles>
     </>
   );
 }
