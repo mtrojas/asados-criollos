@@ -9,6 +9,7 @@ import OrderStyles from '../styles/OrderStyles';
 import MenuItemStyles from '../styles/MenuItemStyles';
 import useAsado from '../utils/useAsado';
 import AsadoOrder from '../components/AsadoOrder';
+import calculateOrderTotal from '../utils/calculateOrderTotal';
 
 export default function QuieroPage({ data }) {
   const asados = data.asados.nodes;
@@ -86,6 +87,10 @@ export default function QuieroPage({ data }) {
             removeFromOrder={removeFromOrder}
             asados={asados}
           />
+        </fieldset>
+        <fieldset>
+          <h3>Total {formatMoney(calculateOrderTotal(order, asados))}</h3>
+          <button type="submit">Hacer Pedido</button>
         </fieldset>
       </OrderStyles>
     </>
