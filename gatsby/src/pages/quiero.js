@@ -7,13 +7,19 @@ import calculateAsadoPrice from '../utils/calculateAsadoPrice';
 import formatMoney from '../utils/formatMoney';
 import OrderStyles from '../styles/OrderStyles';
 import MenuItemStyles from '../styles/MenuItemStyles';
+import useAsado from '../utils/useAsado';
+import AsadoOrder from '../components/AsadoOrder';
 
 export default function QuieroPage({ data }) {
+  const asados = data.asados.nodes;
   const { values, updateValue } = useForm({
     name: '',
     email: '',
   });
-  const asados = data.asados.nodes;
+  const { order, addToOrder, removeFromOrder } = useAsado({
+    asados,
+    inputs: values,
+  });
   return (
     <>
       <SEO title="Quiero mi asado!" />
@@ -57,7 +63,15 @@ export default function QuieroPage({ data }) {
               </div>
               <div>
                 {['S', 'M', 'L'].map((size) => (
-                  <button type="button">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      addToOrder({
+                        id: asado.id,
+                        size,
+                      })
+                    }
+                  >
                     {size} {formatMoney(calculateAsadoPrice(asado.price, size))}
                   </button>
                 ))}
@@ -67,6 +81,11 @@ export default function QuieroPage({ data }) {
         </fieldset>
         <fieldset className="order">
           <legend>Resumen</legend>
+          <AsadoOrder
+            order={order}
+            removeFromOrder={removeFromOrder}
+            asados={asados}
+          />
         </fieldset>
       </OrderStyles>
     </>
