@@ -10,7 +10,7 @@ export default function AsadoOrder({ order, asados, removeFromOrder }) {
       {order.map((singleOrder, index) => {
         const asado = asados.find((asado) => asado.id === singleOrder.id);
         return (
-          <MenuItemStyles key={singleOrder.id}>
+          <MenuItemStyles key={`${singleOrder.id}-${index}`}>
             <Img fluid={asado.image.asset.fluid} />
             <h2>{asado.name}</h2>
             <p>

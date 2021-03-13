@@ -66,6 +66,7 @@ export default function QuieroPage({ data }) {
                 {['S', 'M', 'L'].map((size) => (
                   <button
                     type="button"
+                    key={size}
                     onClick={() =>
                       addToOrder({
                         id: asado.id,
