@@ -17,14 +17,26 @@ export default function QuieroPage({ data }) {
     name: '',
     email: '',
   });
-  const { order, addToOrder, removeFromOrder } = useAsado({
+  const {
+    order,
+    addToOrder,
+    removeFromOrder,
+    error,
+    loading,
+    message,
+    submitOrder,
+  } = useAsado({
     asados,
-    inputs: values,
+    values,
   });
+
+  if (message) {
+    return <p>{message}</p>;
+  }
   return (
     <>
       <SEO title="Quiero mi asado!" />
-      <OrderStyles>
+      <OrderStyles onSubmit={submitOrder}>
         <fieldset>
           <legend>Tus datos</legend>
           <label htmlFor="name">
@@ -91,7 +103,10 @@ export default function QuieroPage({ data }) {
         </fieldset>
         <fieldset>
           <h3>Total {formatMoney(calculateOrderTotal(order, asados))}</h3>
-          <button type="submit">Hacer Pedido</button>
+          <div>{error ? <p>Error: {error}</p> : ''}</div>
+          <button type="submit" disabled={loading}>
+            {loading ? 'Enviando tu orden...' : 'Hacer mi pedido'}
+          </button>
         </fieldset>
       </OrderStyles>
     </>
