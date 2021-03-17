@@ -62,7 +62,7 @@ export default function useAsado({ asados, values }) {
     } else {
       // it worked!
       setLoading(false);
-      setMessage('Success! Come on down for your pizza');
+      setMessage('Pedido exitoso! Asado en camino!');
     }
   }
 
