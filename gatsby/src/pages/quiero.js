@@ -37,7 +37,7 @@ export default function QuieroPage({ data }) {
     <>
       <SEO title="Quiero mi asado!" />
       <OrderStyles onSubmit={submitOrder}>
-        <fieldset>
+        <fieldset disabled={loading}>
           <legend>Tus datos</legend>
           <label htmlFor="name">
             Nombre
@@ -61,7 +61,7 @@ export default function QuieroPage({ data }) {
             />
           </label>
         </fieldset>
-        <fieldset className="menu">
+        <fieldset disabled={loading} className="menu">
           <legend>Elige tu asado</legend>
           {asados.map((asado) => (
             <MenuItemStyles key={asado.id}>
@@ -93,7 +93,7 @@ export default function QuieroPage({ data }) {
             </MenuItemStyles>
           ))}
         </fieldset>
-        <fieldset className="order">
+        <fieldset disabled={loading} className="order">
           <legend>Resumen</legend>
           <AsadoOrder
             order={order}
@@ -101,7 +101,7 @@ export default function QuieroPage({ data }) {
             asados={asados}
           />
         </fieldset>
-        <fieldset>
+        <fieldset disabled={loading}>
           <h3>Total {formatMoney(calculateOrderTotal(order, asados))}</h3>
           <div>{error ? <p>Error: {error}</p> : ''}</div>
           <button type="submit" disabled={loading}>
