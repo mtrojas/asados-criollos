@@ -41,6 +41,7 @@ export default function useAsado({ asados, values }) {
       total: formatMoney(calculateOrderTotal(order, asados)),
       name: values.name,
       email: values.email,
+      mapleSyrup: values.mapleSyrup,
     };
     // 4. Send this data to the serverless function when they check out
     const res = await fetch(

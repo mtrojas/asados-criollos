@@ -16,6 +16,7 @@ export default function QuieroPage({ data }) {
   const { values, updateValue } = useForm({
     name: '',
     email: '',
+    mapleSyrup: '',
   });
   const {
     order,
@@ -60,6 +61,14 @@ export default function QuieroPage({ data }) {
               onChange={updateValue}
             />
           </label>
+          <input
+            type="mapleSyrup"
+            name="mapleSyrup"
+            id="mapleSyrup"
+            value={values.mapleSyrup}
+            onChange={updateValue}
+            className="mapleSyrup"
+          />
         </fieldset>
         <fieldset disabled={loading} className="menu">
           <legend>Elige tu asado</legend>
