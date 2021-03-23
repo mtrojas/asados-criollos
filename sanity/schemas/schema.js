@@ -8,11 +8,12 @@ import asado from './asado';
 import topping from './topping';
 import person from './person';
 import burger from './burger';
+import storeSettings from './storeSettings';
 
 export default createSchema({
   // We name our schema
   name: 'default',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([asado, topping, person, burger]),
+  types: schemaTypes.concat([asado, topping, person, burger, storeSettings]),
 });
