@@ -1,5 +1,20 @@
 import { useEffect, useState } from 'react';
 
+const gql = String.raw;
+
+const deets = gql`
+    name
+    _id
+    image {
+      asset {
+        url
+        metadata {
+          lqip
+        }
+      }
+    }
+`;
+
 export default function useLatestData() {
   // Asados Top
   const [asadosTop, setAsadosTop] = useState();
@@ -15,25 +30,32 @@ export default function useLatestData() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: `query {
-          StoreSettings(id: "downtown") {
-            name
-            parrillero {
+        query: gql`
+          query {
+            StoreSettings(id: "downtown") {
               name
-            }
-            asadosTop {
-              name
+              parrillero {
+                ${deets}
+              }
+              asadosTop {
+                ${deets}
+              }
             }
           }
-        }`,
+        `,
       }),
     })
       .then((res) => res.json())
       .then((res) => {
         // TODO: Check for errors
         // Set the data to state
+        console.log(res.data);
         setAsadosTop(res.data.StoreSettings.asadosTop);
         setParrilleros(res.data.StoreSettings.parrillero);
+      })
+      .catch((err) => {
+        console.log('SHOOT');
+        console.log(err);
       });
   }, []);
   return {
