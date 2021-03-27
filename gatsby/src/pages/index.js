@@ -1,17 +1,21 @@
 import React from 'react';
 import useLatestData from '../utils/useLatestData';
+import LoadingGrid from '../components/LoadingGrid';
+import { HomePageGrid } from '../styles/Grids';
 
-function Parrilleros() {
+function Parrilleros({ parrilleros }) {
   return (
     <div>
-      <p>Parrilleros</p>
+      {!parrilleros && <LoadingGrid count={4} />}
+      {parrilleros && !parrilleros?.length && <p>Parrilleros descansando</p>}
     </div>
   );
 }
-function AsadosTop() {
+function AsadosTop({ asadosTop }) {
   return (
     <div>
-      <p>AsadosTop</p>
+      {!asadosTop && <LoadingGrid count={4} />}
+      {asadosTop && !asadosTop?.length && <p>Asados descansando</p>}
     </div>
   );
 }
@@ -22,10 +26,10 @@ export default function HomePage() {
     <div className="center">
       <h1>Los Mejores Asados de la Capital!</h1>
       <p>En tu casa, con tus amigos!</p>
-      <div>
+      <HomePageGrid>
         <Parrilleros parrilleros={parrilleros} />
         <AsadosTop asadosTop={asadosTop} />
-      </div>
+      </HomePageGrid>
     </div>
   );
 }
